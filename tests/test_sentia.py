@@ -182,7 +182,8 @@ def test_lunch_time_agrees_everywhere(live):
 def test_demo_students_are_in_real_sentia_classes(live):
     """Fictional students, real SenTia class names; the demo teacher teaches Alex and Chloe, not Khanh."""
     classes = {s["student_id"]: s["class_group"] for s in live.students.values()}
-    assert classes == {"S001": "6A1", "S002": "7A1", "S003": "8A1"}
+    assert classes == {"S001": "10A1", "S002": "11A", "S003": "12A1"}   # high school (team decision)
+    assert {s["year"] for s in live.students.values()} == {"10", "11", "12"}
     assert len({s["homeroom_teacher_id"] for s in live.students.values()}) == 3
     teacher = live.users["teacher"]["linked_id"]
     assert teacher in live.student_teacher_ids("S001") and teacher in live.student_teacher_ids("S003")

@@ -16,6 +16,7 @@ Run:  .venv/bin/python -m tools.sentia_campus
 """
 
 import csv
+import re
 import json
 from pathlib import Path
 
@@ -365,21 +366,23 @@ def outdoor_rooms() -> list[dict]:
 # ---------------------------------------------------------------- fictional demo data
 # Alex, Khanh and Chloe are fictional. Their homeroom teachers are the real ones from the
 # door signs; subject teachers are picked from real teachers of that subject.
-DEMO = [("S001", "Alex", "Carter", "6A1"), ("S002", "Khanh", "Ngo", "7A1"), ("S003", "Chloe", "Reed", "8A1")]
-DEMO_TEACHER = "Trần Thị Kim Oanh"   # the 'teacher' login: teaches 6A1 and 8A1, not 7A1 (privacy demo)
+DEMO = [("S001", "Alex", "Carter", "10A1"), ("S002", "Khanh", "Ngo", "11A"), ("S003", "Chloe", "Reed", "12A1")]
+DEMO_TEACHER = "Trần Thị Kim Oanh"   # the 'teacher' login: teaches 10A1 and 12A1, not 11A (privacy demo)
+# Every class rotates through its list the same way, so a teacher (or the gym / ICT room) shared
+# by two classes sits at a different position in each list. main() checks there are no clashes.
 LESSONS = {   # class -> [(subject, teacher full name)]
-    "6A1": [("Literature", "Đỗ Ngọc Anh"), ("Maths", "Nguyễn Thị Thu Hà B"), ("English", "Trần Ngọc Linh"),
-            ("Physics", "Nguyễn Thành Trung"), ("History", "Trần Thị Kim Oanh"), ("Geography", "Nguyễn Thị Huyền"),
-            ("ICT", "Lê Khánh Linh"), ("Music", "Lê Nguyễn Trúc Vy"), ("PE", "Đào Nam Hải"),
-            ("Life Skills", "Đặng Quỳnh Trang")],
-    "7A1": [("Literature", "Nguyễn Diệu Hoa"), ("Maths", "Vũ Thị Hương Quỳnh"), ("English", "Vũ Ngọc Khanh"),
-            ("Biology", "Nguyễn Thị Len"), ("History", "Nguyễn Thị Thanh Hiếu"), ("Geography", "Nguyễn Văn Vinh"),
-            ("ICT", "Trần Quốc Thư"), ("Arts", "Phạm Thị Thúy Hằng"), ("PE", "Đào Nam Hải"),
-            ("Life Skills", "Ngô Phương Linh")],
-    "8A1": [("Literature", "Bùi Thị Thùy"), ("Maths", "Nguyễn Thị Thu Hà A"), ("English", "Trần Ngọc Linh"),
-            ("Chemistry", "Bùi Xuân Dũng"), ("History", "Trần Thị Kim Oanh"), ("Biology", "Hà Thu Ly"),
-            ("ICT", "Alex Kingsley"), ("Music", "Trịnh Mạnh Khuê"), ("PE", "Đào Nam Hải"),
-            ("Physics", "Nguyễn Thị Thúy")],
+    "10A1": [("Literature", "Trần Minh Tâm"), ("Maths", "Vũ Thị Hương Quỳnh"), ("English", "James Austin"),
+             ("Physics", "Nguyễn Thị Thúy"), ("Chemistry", "Bùi Xuân Dũng"), ("History", "Trần Thị Kim Oanh"),
+             ("Geography", "Nguyễn Văn Vinh"), ("ICT", "Lê Khánh Linh"), ("PE", "Đào Nam Hải"),
+             ("Economics and Law", "Nguyễn Thị Vân Anh")],
+    "11A": [("Literature", "Nguyễn Diệu Hoa"), ("Maths", "John Alcantara"), ("English", "Christopher Robinson"),
+            ("Chemistry", "Trần Minh Phúc"), ("Biology", "Nguyễn Thị Len"), ("History", "Nguyễn Thị Thanh Hiếu"),
+            ("Physics", "Nguyễn Thành Trung"), ("PE", "Đào Nam Hải"), ("ICT", "Trần Quốc Thư"),
+            ("Career Counselling", "Đinh Hồng Điệp")],
+    "12A1": [("Literature", "Bùi Thị Thùy"), ("Maths", "Đoàn Thị Phương"), ("English", "Vũ Ngọc Khanh"),
+             ("Biology", "Hà Thu Ly"), ("History", "Trần Thị Kim Oanh"), ("Chemistry", "Trần Minh Phúc"),
+             ("ICT", "Alex Kingsley"), ("Economics and Law", "Nguyễn Thị Vân Anh"), ("Geography", "Nguyễn Thị Huyền"),
+             ("PE", "Đào Nam Hải")],
 }
 CLUBS = [   # club_id, name, name_vi, leader, room, day, start, end
     ("C01", "Coding Club", "Câu lạc bộ Lập trình", "Lê Khánh Linh", "B4-07", "Tuesday", "16:15", "17:15"),
@@ -425,7 +428,12 @@ def main() -> None:
                 subject, teacher = lessons[(di * 3 + pi) % len(lessons)]
                 timetable.append({"class_group": cls, "day": day, "period_id": pid, "subject": subject,
                                   "teacher_id": by_name[teacher], "room_id": SUBJECT_ROOM.get(subject, home)})
-    students = [{"student_id": sid, "first_name": f, "last_name": l, "year": cls[:-2], "class_group": cls,
+    seen = {}
+    for row in timetable:   # no teacher or room is in two places at once
+        for who in (row["teacher_id"], row["room_id"]):
+            key = (row["day"], row["period_id"], who)
+            assert seen.setdefault(key, row["class_group"]) == row["class_group"], (key, seen[key], row["class_group"])
+    students = [{"student_id": sid, "first_name": f, "last_name": l, "year": re.match(r"\d+", cls).group(), "class_group": cls,
                  "homeroom_teacher_id": by_name[CLASSES[cls][1]], "club_ids": STUDENT_CLUBS[sid]}
                 for sid, f, l, cls in DEMO]
     clubs = [{"club_id": c, "name": n, "name_vi": nv, "teacher_id": by_name[t], "room_id": r,
@@ -433,7 +441,7 @@ def main() -> None:
 
     demo = by_name[DEMO_TEACHER]
     teaches = {cls for cls, ls in LESSONS.items() if any(t == DEMO_TEACHER for _, t in ls)}
-    assert teaches == {"6A1", "8A1"}, teaches
+    assert teaches == {"10A1", "12A1"}, teaches
 
     with open(DATA / "events.csv", encoding="utf-8") as f:
         events = list(csv.DictReader(f))

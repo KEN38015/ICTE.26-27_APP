@@ -79,10 +79,10 @@ Run the tests (Windows: `.venv\\Scripts\\python -m pytest -q`):
 
 | Username | Password | Role | Can see |
 |---|---|---|---|
-| `alex` | `Alex-Demo-2026` | Student (Grade 6, 6A1) | Only Alex's own profile |
-| `khanh` | `Khanh-Demo-2026` | Student (Grade 7, 7A1) | Only Khanh's own profile |
-| `chloe` | `Chloe-Demo-2026` | Student (Grade 8, 8A1) | Only Chloe's own profile |
-| `teacher` | `Teacher-Demo-2026` | Teacher (Ms Trần Thị Kim Oanh, History) | Students she teaches (Alex in 6A1, Chloe in 8A1), not Khanh |
+| `alex` | `Alex-Demo-2026` | Student (Grade 10, 10A1) | Only Alex's own profile |
+| `khanh` | `Khanh-Demo-2026` | Student (Grade 11, 11A) | Only Khanh's own profile |
+| `chloe` | `Chloe-Demo-2026` | Student (Grade 12, 12A1) | Only Chloe's own profile |
+| `teacher` | `Teacher-Demo-2026` | Teacher (Ms Trần Thị Kim Oanh, History) | Students she teaches (Alex in 10A1, Chloe in 12A1), not Khanh |
 | `admin` | `Admin-Demo-2026` | Admin | All profiles + admin dashboard |
 
 Passwords are stored in `data/users.csv` only as salted PBKDF2 hashes.

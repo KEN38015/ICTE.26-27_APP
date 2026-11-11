@@ -428,7 +428,7 @@ FAKE_CLUBS = [("Coding Club", "Câu lạc bộ Lập trình"), ("School Choir", 
 
 # Real SenTia class names for the three fictional demo students (Alex, Khanh, Chloe).
 # Only the class names are real; the students themselves are made up.
-DEMO_CLASSES = [("6A1", "6"), ("7A1", "7"), ("8A1", "8")]
+DEMO_CLASSES = [("10A1", "10"), ("11A", "11"), ("12A1", "12")]   # the team covers high school
 
 
 def generate_fictional(tables: dict[str, list[dict]], old_users: list[dict], report: Report) -> dict[str, list[dict]]:
