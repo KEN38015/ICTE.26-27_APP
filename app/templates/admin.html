@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% import "partials/cards.html" as cards with context %}
+{% block title %}{{ t('admin', page_lang) }}{% endblock %}
+{% block content %}
+<h1>{{ t('admin', page_lang) }} dashboard</h1>
+{% if saved %}<p class="notice ok" role="status">Saved ({{ saved }}).</p>{% endif %}
+{% if error %}<p class="notice error" role="alert">Please check the {{ error }} form: required fields are missing or invalid.</p>{% endif %}
+{% if temporary %}
+  <p class="notice">Storage is temporary on this host: the search log and items added here reset when the server restarts. Connect a database (e.g. Supabase) for permanent storage.</p>
+{% endif %}
+
+<section class="stats">
+  <div class="stat"><span class="stat-value">{{ stats.total }}</span><span class="stat-label">Searches logged</span></div>
+  <div class="stat"><span class="stat-value">{{ stats.answered_pct }}%</span><span class="stat-label">Answered</span></div>
+  <div class="stat"><span class="stat-value">{{ stats.statuses.get('not_found', 0) }}</span><span class="stat-label">Not found</span></div>
+  <div class="stat"><span class="stat-value">{{ stats.statuses.get('private', 0) + stats.statuses.get('login_required', 0) }}</span><span class="stat-label">Privacy blocks</span></div>
+</section>
+
+<div class="two-col">
+  <section class="card">
+    <h2 class="h3">Unanswered questions (improve the data with these)</h2>
+    <ul class="list">
+      {% for e in stats.unanswered %}<li>{{ e.query or '(empty)' }} <span class="muted">· {{ e.status }} · {{ e.role }}</span></li>
+      {% else %}<li class="muted">None yet.</li>{% endfor %}
+    </ul>
+  </section>
+  <section class="card">
+    <h2 class="h3">Top answered questions</h2>
+    <ol class="list">
+      {% for q, n in stats.top %}<li>{{ q }} <span class="muted">× {{ n }}</span></li>
+      {% else %}<li class="muted">None yet.</li>{% endfor %}
+    </ol>
+    <h3 class="h4">By intent</h3>
+    <p class="muted">{% for k, v in stats.intents.items() %}{{ k }}: {{ v }}{{ ', ' if not loop.last }}{% endfor %}</p>
+    <h3 class="h4">By role</h3>
+    <p class="muted">{% for k, v in stats.roles.items() %}{{ k }}: {{ v }}{{ ', ' if not loop.last }}{% endfor %}</p>
+  </section>
+</div>
+
+<section class="card">
+  <div class="row">
+    <h2 class="h3">Recent searches</h2>
+    <form method="post" action="/admin/clear-log"><button class="btn small" type="submit">Clear log</button></form>
+  </div>
+  <div class="table-wrap">
+  <table class="table">
+    <thead><tr><th>Question</th><th>Result</th><th>Intent</th><th>Role</th><th>Lang</th></tr></thead>
+    <tbody>
+      {% for e in stats.recent %}<tr><td>{{ e.query }}</td><td>{{ e.status }}</td><td>{{ e.intent }}</td><td>{{ e.role }}</td><td>{{ e.lang }}</td></tr>
+      {% else %}<tr><td colspan="5" class="muted">No searches yet.</td></tr>{% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <p class="muted small">Usernames are never logged. Questions blocked by a privacy rule are stored as "[private request]".</p>
+</section>
+
+<div class="two-col">
+  <section class="card">
+    <h2 class="h3">Add an FAQ</h2>
+    <form method="post" action="/admin/faq" class="stack">
+      <label>Question<input name="question" required minlength="5" maxlength="200"></label>
+      <label>Answer<textarea name="answer" required minlength="5" maxlength="1000" rows="3"></textarea></label>
+      <label>Category<input name="category" maxlength="40" placeholder="General"></label>
+      <label>Keywords (separate with ;)<input name="keywords" maxlength="300" placeholder="bus;transport;school bus"></label>
+      <label>Question (Vietnamese, optional)<input name="question_vi" maxlength="200"></label>
+      <label>Answer (Vietnamese, optional)<textarea name="answer_vi" maxlength="1000" rows="2"></textarea></label>
+      <button class="btn primary" type="submit">Add FAQ</button>
+    </form>
+  </section>
+  <section class="card">
+    <h2 class="h3">Add an event</h2>
+    <form method="post" action="/admin/event" class="stack">
+      <label>Event name<input name="name" required minlength="3" maxlength="100"></label>
+      <label>Date<input name="event_date" type="date" required></label>
+      <div class="row">
+        <label>Start<input name="start" type="time" required></label>
+        <label>End<input name="end" type="time" required></label>
+      </div>
+      <label>Room
+        <select name="room_id"><option value="">(none)</option>
+          {% for r in data.rooms.values() %}<option value="{{ r.room_id }}">{{ r.room_id }} · {{ r.name }}</option>{% endfor %}
+        </select>
+      </label>
+      <label>Description<textarea name="description" maxlength="500" rows="2"></textarea></label>
+      <label>Name (Vietnamese, optional)<input name="name_vi" maxlength="100"></label>
+      <label>Description (Vietnamese, optional)<textarea name="description_vi" maxlength="500" rows="2"></textarea></label>
+      <button class="btn primary" type="submit">Add event</button>
+    </form>
+  </section>
+</div>
+
+<section class="card">
+  <h2 class="h3">Items added by admins</h2>
+  <ul class="list">
+    {% for f in extra_faqs %}
+      <li>FAQ: {{ f.question }}
+        <form method="post" action="/admin/delete" class="inline"><input type="hidden" name="kind" value="faqs"><input type="hidden" name="item_id" value="{{ f.faq_id }}"><button class="btn ghost small" type="submit">Delete</button></form></li>
+    {% endfor %}
+    {% for e in extra_events %}
+      <li>Event: {{ e.name }} ({{ e.date }})
+        <form method="post" action="/admin/delete" class="inline"><input type="hidden" name="kind" value="events"><input type="hidden" name="item_id" value="{{ e.event_id }}"><button class="btn ghost small" type="submit">Delete</button></form></li>
+    {% endfor %}
+    {% if not extra_faqs and not extra_events %}<li class="muted">Nothing added yet. Core data lives in the CSV files in /data.</li>{% endif %}
+  </ul>
+</section>
+
+<section class="card">
+  <h2 class="h3">Data overview</h2>
+  <p class="muted">Teachers: {{ data.teachers|length }} · Rooms: {{ data.rooms|length }} · Policies: {{ data.policies|length }} · FAQs: {{ data.faqs|length }} · Events: {{ data.events|length }} · Periods: {{ data.periods|length }} · Students (fictional): {{ data.students|length }}</p>
+</section>
+{% endblock %}

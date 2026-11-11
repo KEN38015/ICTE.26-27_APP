@@ -1,0 +1,51 @@
+teacher_id,title,first_name,last_name,display_name,position,position_vi,subjects,keywords,department,department_vi,room_id,homeroom_class
+T01,Ms,Anh,Đỗ,Đỗ Ngọc Anh,"Homeroom Teacher, Class 6A1",Giáo viên chủ nhiệm lớp 6A1,Literature;Ngữ văn,,Literature,Ngữ văn,B2-06,6A1
+T02,Ms,Hà,Nguyễn,Nguyễn Thị Thu Hà B,Maths Teacher,Giáo viên Toán,Maths;Toán,,Maths,Toán,,
+T03,Mr,Trung,Nguyễn,Nguyễn Thành Trung,Physics Teacher,Giáo viên Vật lý,Physics;Vật lý,,Science,Khoa học tự nhiên,,
+T04,Mr,Phúc,Trần,Trần Minh Phúc,"Homeroom Teacher, Class 11A",Giáo viên chủ nhiệm lớp 11A,Chemistry;Hóa học,,Science,Khoa học tự nhiên,B4-05,11A
+T05,Ms,Ly,Hà,Hà Thu Ly,"Homeroom Teacher, Class 12A1",Giáo viên chủ nhiệm lớp 12A1,Biology;Sinh học,,Science,Khoa học tự nhiên,B4-06,12A1
+T06,Ms,Hiếu,Nguyễn,Nguyễn Thị Thanh Hiếu,"Homeroom Teacher, Class 7A1",Giáo viên chủ nhiệm lớp 7A1,History;Lịch sử,,Social Studies,Khoa học xã hội,B2-05,7A1
+T07,Ms,Huyền,Nguyễn,Nguyễn Thị Huyền,"Homeroom Teacher, Class 7A2",Giáo viên chủ nhiệm lớp 7A2,Geography;Địa lý,,Social Studies,Khoa học xã hội,B2-04,7A2
+T08,Ms,Linh,Lê,Lê Khánh Linh,ICT Teacher,Giáo viên Tin học,ICT;Tin học,,ICT,Tin học,B4-07,
+T09,Ms,Vy,Lê,Lê Nguyễn Trúc Vy,Music Teacher,Giáo viên Âm nhạc,Music;Âm nhạc,,Arts & Music,Nghệ thuật,,
+T10,Ms,Hằng,Phạm,Phạm Thị Thúy Hằng,Arts Teacher,Giáo viên Mỹ thuật,Arts;Mỹ thuật,,Arts & Music,Nghệ thuật,,
+T11,Ms,Trang,Đặng,Đặng Quỳnh Trang,"Life Skills Teacher, School Counsellor","Giáo viên Kỹ năng sống, Tư vấn tâm lý",Life Skills;Kỹ năng sống;Counselor;Tư vấn tâm lý,counsellor;counselor;school counsellor;tu van tam ly;tu van hoc duong,Life Skills,Kỹ năng sống,,
+T12,Mr,Hải,Đào,Đào Nam Hải,PE Teacher,Giáo viên Thể dục,PE;Thể dục,,PE,Giáo dục thể chất,GYM,
+T13,Ms,Tuấn,Khuất,Khuất Thị Tuấn,"Homeroom Teacher, Class 6A2",Giáo viên chủ nhiệm lớp 6A2,Maths;Toán,,Maths,Toán,B2-07,6A2
+T14,Mr,Đức,Nguyễn,Nguyễn Anh Đức,Science Teacher,Giáo viên Khoa học,Science;Khoa học,,Science,Khoa học tự nhiên,,
+T15,Ms,Hà,Đặng,Đặng Thị Hà,"Homeroom Teacher, Class 9A1",Giáo viên chủ nhiệm lớp 9A1,Literature;Ngữ văn,,Literature,Ngữ văn,B3-05,9A1
+T16,Ms,Len,Nguyễn,Nguyễn Thị Len,Biology Teacher,Giáo viên Sinh học,Biology;Sinh học,,Science,Khoa học tự nhiên,,
+T17,Ms,Linh,Trần,Trần Ngọc Linh,"Homeroom Teacher, Class 8A1",Giáo viên chủ nhiệm lớp 8A1,English;Tiếng Anh,,Literature,Ngữ văn,B2-01,8A1
+T18,Ms,Hà,Nguyễn,Nguyễn Thị Thu Hà A,"Homeroom Teacher, Class 8A2",Giáo viên chủ nhiệm lớp 8A2,Maths;Toán,,Maths,Toán,B2-02,8A2
+T19,Ms,Hoa,Nguyễn,Nguyễn Diệu Hoa,Literature Teacher,Giáo viên Ngữ văn,Literature;Ngữ văn,,Literature,Ngữ văn,,
+T20,Mr,Khuê,Trịnh,Trịnh Mạnh Khuê,Music Teacher,Giáo viên Âm nhạc,Music;Âm nhạc,,Arts & Music,Nghệ thuật,,
+T21,Mr,Alex,Kingsley,Alex Kingsley,ICT Teacher,Giáo viên Tin học,ICT;Tin học,,ICT,Tin học,B4-07,
+T22,Mr,Thư,Trần,Trần Quốc Thư,ICT Teacher,Giáo viên Tin học,ICT;Tin học,,ICT,Tin học,B4-07,
+T23,Ms,Thúy,Nguyễn,Nguyễn Thị Thúy,"Homeroom Teacher, Class 10A1",Giáo viên chủ nhiệm lớp 10A1,Physics;Vật lý,,Science,Khoa học tự nhiên,B4-03,10A1
+T24,Mr,Dũng,Bùi,Bùi Xuân Dũng,"Homeroom Teacher, Class 9A2",Giáo viên chủ nhiệm lớp 9A2,Chemistry;Hóa học,,Science,Khoa học tự nhiên,B3-04,9A2
+T25,Ms,Linh,Ngô,Ngô Phương Linh,"Life Skills Teacher, School Counsellor","Giáo viên Kỹ năng sống, Tư vấn tâm lý",Life Skills;Kỹ năng sống;Counselor;Tư vấn tâm lý,counsellor;counselor;school counsellor;tu van tam ly;tu van hoc duong,Life Skills,Kỹ năng sống,,
+T26,Ms,Khanh,Vũ,Vũ Ngọc Khanh,English Teacher,Giáo viên Tiếng Anh,English;Tiếng Anh,,Literature,Ngữ văn,,
+T27,Ms,Anh,Nguyễn,Nguyễn Thị Vân Anh,Economics and Law Teacher,Giáo viên Giáo dục kinh tế và pháp luật,Economics and Law;Giáo dục kinh tế và pháp luật,,Social Studies,Khoa học xã hội,,
+T28,Mr,Vinh,Nguyễn,Nguyễn Văn Vinh,"Homeroom Teacher, Class 10A2",Giáo viên chủ nhiệm lớp 10A2,Geography;Địa lý,,Social Studies,Khoa học xã hội,B4-04,10A2
+T29,Ms,Quỳnh,Vũ,Vũ Thị Hương Quỳnh,Maths Teacher,Giáo viên Toán,Maths;Toán,,Maths,Toán,,
+T30,Ms,Oanh,Trần,Trần Thị Kim Oanh,History Teacher,Giáo viên Lịch sử,History;Lịch sử,,Social Studies,Khoa học xã hội,,
+T31,Ms,Phương,Đoàn,Đoàn Thị Phương,"Homeroom Teacher, Class 12A2",Giáo viên chủ nhiệm lớp 12A2,Maths;Toán,,Maths,Toán,B4-08,12A2
+T32,Ms,Tâm,Trần,Trần Minh Tâm,Literature Teacher,Giáo viên Ngữ văn,Literature;Ngữ văn,,Literature,Ngữ văn,,
+T33,Mr,Minh,Nguyễn,Nguyễn Nhật Minh,Music Teacher,Giáo viên Âm nhạc,Music;Âm nhạc,,Arts & Music,Nghệ thuật,,
+T34,Ms,Thư,Nguyễn,Nguyễn Thị Tuệ Thư,Arts Teacher,Giáo viên Mỹ thuật,Arts;Mỹ thuật,,Arts & Music,Nghệ thuật,,
+T35,Ms,Điệp,Đinh,Đinh Hồng Điệp,Career Counsellor,Tư vấn hướng nghiệp,Career Counselling;Tư vấn hướng nghiệp,,Social Studies,Khoa học xã hội,B4-02,
+T36,Ms,Thùy,Bùi,Bùi Thị Thùy,Literature Teacher,Giáo viên Ngữ văn,Literature;Ngữ văn,,Literature,Ngữ văn,,
+T37,Ms,Joey,Hồ,Joey,Principal,Hiệu trưởng nhà trường,,head;headmaster;head teacher;head of school;hieu truong;Hồ Nghi Joey,School Board,Ban Giám hiệu,,
+T38,Mr,Philip,MacDonald-Milner,Philip MacDonald-Milner,Principal of Secondary,Hiệu trưởng cấp Trung học,,secondary principal;head of secondary;hieu truong trung hoc;hieu truong cap trung hoc,School Board,Ban Giám hiệu,B2-03,
+T39,Ms,Khánh,Nguyễn,Nguyễn Thị Kim Khánh,Vice-principal of Secondary,Phó Hiệu trưởng cấp Trung học,,vice principal;deputy principal;deputy head;pho hieu truong;hieu pho,School Board,Ban Giám hiệu,B2-03,
+T40,Ms,Lan,,Lan,Librarian,Thủ thư,,librarian;library;thu thu;thu vien,Other staff,Nhân viên khác,B3-06,
+T41,Mr,Christopher,Robinson,Christopher Robinson,English Teacher,Giáo viên Tiếng Anh,English;Tiếng Anh,,Literature,Ngữ văn,,
+T42,Mr,James,Austin,James Austin,English Teacher,Giáo viên Tiếng Anh,English;Tiếng Anh,,Literature,Ngữ văn,,
+T43,Mr,John,Alcantara,John Alcantara,Maths Teacher,Giáo viên Toán,Maths;Toán,,Maths,Toán,,
+T44,Mr,Renz,Suyat,Renz Suyat,Science Teacher,Giáo viên Khoa học,Science;Khoa học,,Science,Khoa học tự nhiên,,
+T45,Ms,Lara,Magtibay,Lara Magtibay,Wellbeing Teacher,Giáo viên chăm sóc sức khỏe tinh thần,Wellbeing;Chăm sóc sức khỏe tinh thần,wellbeing;well being;mental health;suc khoe tinh than,Social Studies,Khoa học xã hội,,
+T46,Mr,R-Jay,Bool,R-Jay Bool,IGCSE Science Teacher,Giáo viên Khoa học IGCSE,IGCSE Science;Khoa học IGCSE,,Science,Khoa học tự nhiên,,
+T47,Ms,Tuấn,,Tuấn,School Guard,Bảo vệ,,guard;security;security guard;bao ve,Other staff,Nhân viên khác,,
+T48,Ms,Hoài,Hà,Hà Hoài,School Nurse,Nhân viên y tế,,nurse;school nurse;medical;sick;y te;phong y te;nhan vien y te,Other staff,Nhân viên khác,,
+T49,Ms,Mai,Kiều,Kiều Thị Hương Mai,School Nurse,Nhân viên y tế,,nurse;school nurse;medical;sick;y te;phong y te;nhan vien y te,Other staff,Nhân viên khác,,
+T50,Ms,Hương,Phạm,Phạm Thị Hương,School Chef,Đầu bếp,,chef;cook;kitchen;canteen;dau bep;nau an,Other staff,Nhân viên khác,CANTEEN,

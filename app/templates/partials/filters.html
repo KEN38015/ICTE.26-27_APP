@@ -1,0 +1,18 @@
+{# Shared filter bar for browse pages: a category select + a text filter. #}
+{% macro filter_bar(action, select_name, options, selected, q, label_fn=None) %}
+<form class="filters" method="get" action="{{ action }}" hx-get="{{ action }}" hx-target="#list" hx-select="#list"
+      hx-swap="outerHTML" hx-trigger="change, keyup changed delay:300ms from:find input" hx-push-url="true">
+  <label>{{ t('filter', page_lang) }}
+    <select name="{{ select_name }}">
+      <option value="">{{ t('all', page_lang) }}</option>
+      {% for o in options %}
+        <option value="{{ o }}" {% if o == selected %}selected{% endif %}>{{ label_fn(o) if label_fn else o }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label class="grow">{{ t('search_list', page_lang) }}
+    <input type="search" name="q" value="{{ q }}" maxlength="100">
+  </label>
+  <noscript><button class="btn" type="submit">{{ t('filter', page_lang) }}</button></noscript>
+</form>
+{% endmacro %}

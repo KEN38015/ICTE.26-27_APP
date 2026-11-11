@@ -1,0 +1,11 @@
+period_id,name,name_vi,aliases,start,end,kind
+HR,Home Room,Sinh hoạt lớp,homeroom;roll call;school start;school starts;start of school;start of day;vao hoc,08:00,08:15,class
+P1,Period 1,Tiết 1,first period;p1;tiet 1,08:15,09:05,class
+P2,Period 2,Tiết 2,second period;p2;tiet 2,09:05,09:55,class
+R,Recess,Ra chơi,recess;morning break;break;morning tea;ra choi,09:55,10:15,break
+P3,Period 3,Tiết 3,third period;p3;tiet 3,10:15,11:05,class
+P4,Period 4,Tiết 4,fourth period;p4;tiet 4,11:05,11:55,class
+L,Lunch,Nghỉ trưa,lunch;lunch break;lunchtime;nghi trua;an trua,11:55,12:40,break
+P5,Period 5,Tiết 5,fifth period;p5;tiet 5,12:40,13:30,class
+P6,Period 6,Tiết 6,sixth period;last period;p6;tiet 6,13:30,14:20,class
+END,School finishes,Tan học,end of day;school ends;home time;finish;dismissal;tan hoc,14:20,14:20,end

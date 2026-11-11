@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% import "partials/cards.html" as cards with context %}
+{% import "partials/map.html" as maps with context %}
+{% block title %}{{ t('map', page_lang) }}{% endblock %}
+{% block content %}
+<h1>{{ t('map', page_lang) }}</h1>
+<p class="muted">{{ t('map_help', page_lang) }}</p>
+{% if bad_room %}<p class="notice">{{ t('not_found', page_lang) }}</p>{% endif %}
+<div class="map-layout">
+  <div>{{ maps.campus_map(selected=selected, building=building) }}</div>
+  <div>
+    {% if selected %}
+      {{ cards.room(selected, with_map=False) }}
+    {% endif %}
+    {% if building %}
+      <h2 class="h3">{{ t('rooms_in', page_lang) }} {{ tr(building, 'name', page_lang) }}</h2>
+      <ul class="list">
+        {% for r in rooms_here %}
+          <li><a href="/map?room={{ r.room_id }}" {% if selected and selected.room_id == r.room_id %}aria-current="true"{% endif %}>{{ r.room_id }} · {{ tr(r, 'name', page_lang) }}</a> <span class="muted">({{ r.floor }})</span></li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <ul class="list">
+        {% for b in data.buildings.values() %}
+          <li><a href="/map?building={{ b.building_id }}">{{ b.building_id }} · {{ tr(b, 'name', page_lang) }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

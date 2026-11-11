@@ -1,0 +1,64 @@
+{# The assistant's reply to one question. Returned on its own to HTMX requests. #}
+{% import "partials/cards.html" as cards with context %}
+{% set r = result %}
+<section class="answer status-{{ r.status }}" id="answer-body" lang="{{ lang }}" aria-live="polite" tabindex="-1">
+  <div class="bubble user"><span class="muted">{{ t('you_asked', lang) }}:</span> {{ r.query }}</div>
+
+  <div class="bubble bot" data-speak>
+    {% if r.corrected %}<p class="muted">{{ t('showing_for', lang) }} “{{ r.corrected }}”</p>{% endif %}
+
+    {% if r.status == 'help' %}
+      <p>{{ t('help', lang) }}</p>
+    {% elif r.status == 'invalid' %}
+      <p>{{ t('invalid_' ~ r.reason, lang) }}</p>
+    {% elif r.status == 'private' %}
+      <p class="notice privacy">🔒 {{ t('private_' ~ r.reason, lang) }}</p>
+    {% elif r.status == 'login_required' %}
+      <p class="notice privacy">🔒 {{ t('login_required_' ~ r.reason, lang) }}</p>
+      <p><a class="btn small primary" href="/login?next=/profile">{{ t('login', lang) }}</a></p>
+    {% elif r.status == 'need_name' %}
+      <p>{{ t('need_name', lang) }}</p>
+    {% elif r.status == 'not_found' %}
+      <p>{{ t('not_found_' ~ r.reason, lang) if r.reason else t('not_found', lang) }}</p>
+      {% if r.suggestions %}
+        <p class="muted">{{ t('did_you_mean', lang) }}</p>
+        <div class="chips">
+          {% for s in r.suggestions %}
+            <button class="chip" type="button" hx-post="/ask" hx-vals='{"q": {{ s|tojson }}}' hx-target="#answer" hx-swap="innerHTML">{{ s }}</button>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% else %}
+      {% if r.note and r.note not in ('lesson',) %}<p>{{ t('note_' ~ r.note, lang) }}</p>{% endif %}
+
+      {% if r.note == 'lesson' %}
+        {% set l = r.extra %}
+        {% if l.row %}
+          <div class="card highlight">
+            <p class="kind">{{ t('lesson_' ~ l.state, lang) }}</p>
+            <h3>{{ l.row.subject }}</h3>
+            <p class="big">{{ l.period.start }} – {{ l.period.end }} · {{ tr(l.period, 'name', lang) }}</p>
+            <p>{{ data.teacher_name(l.row.teacher_id) }} · {{ cards.room_line(l.row.room_id) }}</p>
+          </div>
+        {% elif l.state in ('before', 'after', 'weekend') %}
+          <p>{{ t('note_' ~ l.state, lang) }}</p>
+        {% else %}
+          <p>{{ t('lesson_none', lang) }}</p>
+        {% endif %}
+      {% endif %}
+
+      {% if r.intent == 'profile' and r.hits|length == 1 and r.hits[0].kind == 'student' %}
+        {{ cards.student_full(r.hits[0].item) }}
+      {% elif r.note == 'all' %}
+        {{ cards.periods_table(r.hits|map(attribute='item')|list) }}
+      {% else %}
+        <div class="cards {{ 'single' if r.hits|length == 1 }}">
+          {% for h in r.hits %}{{ cards.hit(h, r.note) }}{% endfor %}
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+  <div class="answer-tools">
+    <button class="btn ghost small" type="button" data-tts aria-label="{{ t('read_aloud', lang) }}">🔊 {{ t('read_aloud', lang) }}</button>
+  </div>
+</section>

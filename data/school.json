@@ -1,0 +1,60 @@
+{
+  "name": "SenTia School",
+  "name_vi": "Trường Tiểu học – THCS – THPT SenTia",
+  "is_sample": true,
+  "timezone": "Asia/Ho_Chi_Minh",
+  "map": {
+    "width": 800,
+    "height": 520,
+    "hub": [
+      465,
+      455
+    ],
+    "labels": [
+      [
+        48,
+        395,
+        "T1"
+      ],
+      [
+        48,
+        337,
+        "T2"
+      ],
+      [
+        48,
+        280,
+        "T3"
+      ],
+      [
+        48,
+        222,
+        "T4"
+      ],
+      [
+        498,
+        400,
+        "T1"
+      ],
+      [
+        498,
+        352,
+        "T2"
+      ],
+      [
+        498,
+        305,
+        "T3"
+      ],
+      [
+        498,
+        257,
+        "T4"
+      ]
+    ]
+  },
+  "banner": "Demo prototype: policies, bell times, rooms, staff and the 2026–2027 calendar come from SenTia School. All student information is fictional.",
+  "banner_vi": "Bản mẫu: quy định, giờ học, phòng học, giáo viên và lịch năm học 2026–2027 lấy từ Trường SenTia. Mọi thông tin học sinh đều là hư cấu.",
+  "calendar_note": "From SenTia's provisional 2026–2027 secondary calendar. Project dates are set by each department, and changes are announced to parents.",
+  "calendar_note_vi": "Theo lịch dự kiến năm học 2026–2027 cấp Trung học của SenTia. Thời gian các dự án do bộ môn sắp xếp; điều chỉnh (nếu có) sẽ được thông báo tới phụ huynh."
+}

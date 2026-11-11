@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ t('login', page_lang) }}{% endblock %}
+{% block content %}
+<section class="narrow card">
+  <h1>{{ t('login', page_lang) }}</h1>
+  <p class="muted">{{ t('login_intro', page_lang) }}</p>
+  {% if error %}<p class="notice error" role="alert">{{ t(error, page_lang) }}</p>{% endif %}
+  <form method="post" action="/login" class="stack" hx-boost="false">
+    <input type="hidden" name="next" value="{{ next }}">
+    <label>{{ t('username', page_lang) }}<input name="username" autocomplete="username" required maxlength="50" value="{{ username }}"></label>
+    <label>{{ t('password', page_lang) }}<input name="password" type="password" autocomplete="current-password" required maxlength="100"></label>
+    <button class="btn primary" type="submit">{{ t('login', page_lang) }}</button>
+  </form>
+</section>
+{% endblock %}

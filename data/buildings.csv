@@ -1,0 +1,5 @@
+building_id,name,name_vi,x,y,w,h,entrance_x,entrance_y
+F,Sports Fields,Sân thể thao,40,20,400,110,465,95
+S,"Canteen, Pool & Gym","Căng-tin, Bể bơi & Phòng thể chất",490,20,270,150,465,120
+B,Zone B,Khu B,40,160,400,260,240,420
+A,Zone A,Khu A,490,200,270,220,625,420

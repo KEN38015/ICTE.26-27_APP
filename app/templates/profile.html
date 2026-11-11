@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import "partials/cards.html" as cards with context %}
+{% block title %}{{ t('profile', page_lang) }}{% endblock %}
+{% block content %}
+<h1>{{ t('profile', page_lang) }}</h1>
+<p class="notice privacy">🔒 {{ t('privacy_note', page_lang) }}</p>
+{% if user.role != 'student' %}
+  <nav class="chips" aria-label="{{ t('my_students', page_lang) }}">
+    <span class="muted">{{ t('my_students', page_lang) }}:</span>
+    {% for s in visible %}
+      <a class="chip {{ 'active' if student and s.student_id == student.student_id }}" href="/profile?student={{ s.student_id }}">{{ s.first_name }} {{ s.last_name }} ({{ s.class_group }})</a>
+    {% else %}<span class="muted">{{ t('no_items', page_lang) }}</span>{% endfor %}
+  </nav>
+{% endif %}
+{% if student %}{{ cards.student_full(student) }}{% endif %}
+{% endblock %}

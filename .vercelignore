@@ -1,0 +1,6 @@
+.venv
+instance
+tests
+.pytest_cache
+__pycache__
+.claude

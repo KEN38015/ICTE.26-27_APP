@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="{{ page_lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ t('tagline', page_lang) }}{% endblock %} · {{ school_name }}</title>
+  <meta name="description" content="Smart School Assistant: policies, staff, rooms, bell times, events, FAQs and student profiles.">
+  <link rel="icon" href="{{ url_for('static', path='favicon.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+  <script src="{{ url_for('static', path='js/theme.js') }}"></script>
+  <script src="https://unpkg.com/htmx.org@2.0.4/dist/htmx.min.js" defer></script>
+  <script src="{{ url_for('static', path='js/app.js') }}" defer></script>
+</head>
+<body hx-boost="true">
+  <a class="skip" href="#main">Skip to content</a>
+  {% if data.school.banner %}<div class="banner" role="note">{{ tr(data.school, 'banner', page_lang) }}</div>
+  {% elif data.school.is_sample %}<div class="banner" role="note">{{ t('sample_banner', page_lang) }}</div>{% endif %}
+  <header class="topbar">
+    <a class="brand" href="/">
+      <span class="logo" aria-hidden="true">SSA</span>
+      <span><strong>{{ school_name }}</strong><small>{{ t('tagline', page_lang) }}</small></span>
+    </a>
+    <div class="top-actions">
+      <a class="btn ghost small" href="/lang/{{ 'en' if page_lang == 'vi' else 'vi' }}?next={{ path }}" hx-boost="false"
+         lang="{{ 'en' if page_lang == 'vi' else 'vi' }}">{{ t('language', page_lang) }}</a>
+      <button class="btn ghost small icon" type="button" id="theme-toggle" aria-label="{{ t('theme', page_lang) }}" title="{{ t('theme', page_lang) }}">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg>
+      </button>
+      {% if user %}
+        <span class="who">{{ t('logged_in_as', page_lang) }} <strong>{{ user.username }}</strong> ({{ t('role_' ~ user.role, page_lang) }})</span>
+        <form method="post" action="/logout" class="inline"><button class="btn small" type="submit">{{ t('logout', page_lang) }}</button></form>
+      {% else %}
+        <a class="btn small primary" href="/login?next={{ path }}">{{ t('login', page_lang) }}</a>
+      {% endif %}
+    </div>
+  </header>
+  <nav class="nav" aria-label="Main">
+    {% set nav_items = [('/', 'home'), ('/policies', 'policies'), ('/directory', 'directory'), ('/map', 'map'),
+                    ('/schedule', 'schedule'), ('/faqs', 'faqs'), ('/profile', 'profile')] %}
+    {% for href, key in nav_items %}
+      <a href="{{ href }}" {% if path == href %}aria-current="page"{% endif %}>{{ t(key, page_lang) }}</a>
+    {% endfor %}
+    {% if user and user.role == 'admin' %}<a href="/admin" {% if path == '/admin' %}aria-current="page"{% endif %}>{{ t('admin', page_lang) }}</a>{% endif %}
+  </nav>
+  <main id="main" class="container">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="footer">
+    <p>{{ t('privacy_note', page_lang) }}</p>
+    <p><a href="/about">{{ t('ai_note', page_lang) }} · Architecture</a></p>
+  </footer>
+</body>
+</html>

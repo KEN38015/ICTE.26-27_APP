@@ -1,0 +1,10 @@
+event_id,name,name_vi,aliases,date,start,end,room_id,description,description_vi
+E01,Science Fair,Hội chợ Khoa học,science fair;science expo;hoi cho khoa hoc,2026-11-20,09:00,14:00,G001,Students present science projects to judges and families.,Học sinh trình bày dự án khoa học trước giám khảo và phụ huynh.
+E02,Parent-Teacher Interviews,Họp phụ huynh,parent teacher interviews;parent teacher night;ptm;parents evening;hop phu huynh,2026-11-26,15:30,19:00,L001,Families meet teachers to discuss student progress. Book a time through Reception.,Phụ huynh gặp giáo viên để trao đổi về tiến bộ của học sinh. Đặt lịch qua Lễ tân.
+E03,Year 12 Graduation,Lễ tốt nghiệp Lớp 12,graduation;year 12 graduation;tot nghiep,2026-12-04,18:00,20:00,G001,Ceremony celebrating the graduating Year 12 class.,Buổi lễ chúc mừng học sinh Lớp 12 tốt nghiệp.
+E04,Winter Music Concert,Hòa nhạc mùa đông,concert;music concert;winter concert;hoa nhac,2026-12-10,18:30,20:00,G001,Performances by the school band and choir.,Biểu diễn của ban nhạc và dàn hợp xướng của trường.
+E05,Last Day of Term 1,Ngày cuối Học kỳ 1,end of term;last day of term;term ends;holidays;cuoi hoc ky,2026-12-18,08:00,12:00,,School finishes at 12:00 noon. Holidays begin.,Trường tan học lúc 12 giờ trưa. Bắt đầu kỳ nghỉ.
+E06,First Day of Term 2,Ngày đầu Học kỳ 2,start of term;term 2 starts;back to school;first day;dau hoc ky,2027-01-05,08:00,14:20,,Normal timetable resumes.,Thời khóa biểu bình thường trở lại.
+E07,Sports Day,Ngày hội Thể thao,sports day;athletics carnival;athletics day;the thao,2027-02-12,08:30,14:00,G001,Whole-school athletics competition. Wear your sports uniform.,Thi đấu điền kinh toàn trường. Mặc đồng phục thể dục.
+E08,Book Week Parade,Diễu hành Tuần lễ Sách,book week;book parade;tuan le sach,2027-03-04,08:30,10:00,L001,Dress as a favourite book character.,Hóa trang thành nhân vật sách yêu thích.
+E09,ICT Explorer Showcase,Triển lãm ICT Explorer,ict explorer;showcase;tech showcase;coding showcase,2027-03-18,13:30,15:30,B201,Student technology projects on display.,Trưng bày các dự án công nghệ của học sinh.

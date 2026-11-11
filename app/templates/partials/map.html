@@ -1,0 +1,63 @@
+{# Campus map drawn from data/buildings.csv and data/rooms.csv.
+   The route goes: main path -> building entrance -> room. The gates aren't drawn
+   because their exact positions aren't known yet. #}
+{% macro campus_map(selected=None, building=None, compact=False) %}
+{% set m = data.school.map %}
+{% set hub = m.hub %}
+<figure class="map {{ 'compact' if compact }}">
+<svg viewBox="0 0 {{ m.width }} {{ m.height }}" role="img"
+     aria-label="{{ t('map', lang) }}{% if selected %}: {{ tr(selected, 'name', lang) }}{% endif %}">
+  <rect class="map-ground" x="0" y="0" width="{{ m.width }}" height="{{ m.height }}" rx="16"/>
+  {# paths #}
+  <line class="map-path" x1="40" y1="{{ hub[1] }}" x2="{{ m.width - 40 }}" y2="{{ hub[1] }}"/>
+  {% for b in data.buildings.values() %}
+    <line class="map-path thin" x1="{{ b.entrance_x }}" y1="{{ hub[1] }}" x2="{{ b.entrance_x }}" y2="{{ b.entrance_y }}"/>
+  {% endfor %}
+  {# buildings #}
+  {% for b in data.buildings.values() %}
+    {% set active = (building and building.building_id == b.building_id) or (selected and selected.building_id == b.building_id) %}
+    <a href="/map?building={{ b.building_id }}" class="map-link">
+      <rect class="map-building {{ 'active' if active }}" x="{{ b.x }}" y="{{ b.y }}" width="{{ b.w }}" height="{{ b.h }}" rx="10">
+        <title>{{ tr(b, 'name', lang) }}</title>
+      </rect>
+      <text class="map-label" x="{{ b.x|int + 12 }}" y="{{ b.y|int + 24 }}">{{ b.building_id }} · {{ tr(b, 'name', lang) }}</text>
+    </a>
+  {% endfor %}
+  {# floor labels (T1 = Tầng 1, ground floor) #}
+  {% for lx, ly, text in m.labels or [] %}
+    <text class="map-floor-label" x="{{ lx }}" y="{{ ly }}">{{ text }}</text>
+  {% endfor %}
+  {# route to the selected room #}
+  {% if selected %}
+    {% set b = data.buildings[selected.building_id] %}
+    <polyline class="map-route"
+      points="{{ hub[0] }},{{ hub[1] }} {{ b.entrance_x }},{{ hub[1] }} {{ b.entrance_x }},{{ b.entrance_y }} {{ selected.map_x }},{{ selected.map_y }}"/>
+  {% endif %}
+  {# room pins #}
+  {% if not compact %}
+    {% for r in data.rooms.values() %}
+      {% if not selected or r.room_id != selected.room_id %}
+      <a href="/map?room={{ r.room_id }}" class="map-link">
+        <circle class="map-pin" cx="{{ r.map_x }}" cy="{{ r.map_y }}" r="5"><title>{{ r.room_id }} · {{ tr(r, 'name', lang) }} ({{ r.floor }})</title></circle>
+      </a>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% if selected %}
+    <circle class="map-pin selected" cx="{{ selected.map_x }}" cy="{{ selected.map_y }}" r="12"/>
+    <text class="map-pin-label" x="{{ selected.map_x|int + 16 }}" y="{{ selected.map_y|int + 6 }}">{{ selected.room_id }}</text>
+  {% endif %}
+</svg>
+</figure>
+{% endmacro %}
+
+{# Step-by-step route guidance: a generated first step, then the room's own directions. #}
+{% macro route_steps(room) %}
+{% set b = data.buildings[room.building_id] %}
+<ol class="steps">
+  <li>{% if lang == 'vi' %}Đi theo lối đi chính đến {{ tr(b, 'name', lang) }} (Tòa {{ b.building_id }}).{% else %}Follow the main path to {{ b.name }} (Building {{ b.building_id }}).{% endif %}</li>
+  {% for step in tr(room, 'directions', lang).split('. ') if step.strip() %}
+    <li>{{ step.strip().rstrip('.') }}.</li>
+  {% endfor %}
+</ol>
+{% endmacro %}

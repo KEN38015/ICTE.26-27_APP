@@ -1,0 +1,7 @@
+club_id,name,name_vi,teacher_id,room_id,day,start,end
+C01,Coding Club,Câu lạc bộ Lập trình,T05,B201,Tuesday,14:30,15:30
+C02,Robotics Club,Câu lạc bộ Robot,T04,B102,Thursday,14:30,15:30
+C03,School Choir,Dàn hợp xướng,T09,C102,Wednesday,14:30,15:30
+C04,Basketball,Bóng rổ,T07,G001,Monday,14:30,16:00
+C05,Art Club,Câu lạc bộ Mỹ thuật,T08,C101,Friday,14:30,15:30
+C06,Debate Club,Câu lạc bộ Tranh biện,T01,A101,Thursday,12:00,12:40

@@ -1,0 +1,193 @@
+{# One small layout per kind of record. Used by chat answers and browse pages. #}
+{% import "partials/map.html" as maps with context %}
+
+{% macro teacher_name(x) %}{{ data.teacher_name(x.teacher_id) }}{% endmacro %}
+
+{% macro room_line(room_id) %}
+  {% set r = data.rooms.get(room_id) %}
+  {% if r %}{% set b = data.buildings[r.building_id] %}
+    <a href="/map?room={{ r.room_id }}">{{ r.room_id }} · {{ tr(r, 'name', lang) }}</a>
+    <span class="muted">({{ tr(b, 'name', lang) }}, {{ r.floor }})</span>
+  {% endif %}
+{% endmacro %}
+
+{% macro fmt_date(iso) %}{% set d = iso.split('-') %}{% if lang == 'vi' %}{{ d[2] }}/{{ d[1] }}/{{ d[0] }}{% else %}{{ d[2]|int }} {{ ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d[1]|int - 1] }} {{ d[0] }}{% endif %}{% endmacro %}
+
+{% macro room(r, with_map=True) %}
+{% set b = data.buildings[r.building_id] %}
+<article class="card kind-room">
+  <p class="kind">{{ t('location', lang) }}</p>
+  <h3>{{ tr(r, 'name', lang) }}</h3>
+  <dl class="facts">
+    <div><dt>{{ t('room', lang) }}</dt><dd>{{ r.room_id }}</dd></div>
+    <div><dt>{{ t('building', lang) }}</dt><dd>{{ tr(b, 'name', lang) }} ({{ b.building_id }})</dd></div>
+    <div><dt>{{ t('floor', lang) }}</dt><dd>{{ r.floor }}</dd></div>
+  </dl>
+  <h4>{{ t('directions', lang) }}</h4>
+  {{ maps.route_steps(r) }}
+  {% if with_map %}{{ maps.campus_map(selected=r, compact=True) }}{% endif %}
+  <p><a class="btn small" href="/map?room={{ r.room_id }}">{{ t('show_map', lang) }}</a></p>
+</article>
+{% endmacro %}
+
+{% macro teacher(x, show_directions=False) %}
+<article class="card kind-teacher">
+  <p class="kind">{{ t('staff_member', lang) }}</p>
+  <h3>{{ teacher_name(x) }}</h3>
+  <p class="muted">{{ tr(x, 'position', lang) }}</p>
+  <dl class="facts">
+    {% if x.subjects %}<div><dt>{{ t('subjects', lang) }}</dt><dd>{{ x.subjects|join(', ') }}</dd></div>{% endif %}
+    {% if x.department %}<div><dt>{{ t('department', lang) }}</dt><dd>{{ tr(x, 'department', lang) }}</dd></div>{% endif %}
+    {% if data.rooms.get(x.room_id) %}<div><dt>{{ t('room', lang) }}</dt><dd>{{ room_line(x.room_id) }}</dd></div>{% endif %}
+  </dl>
+  {% if show_directions and data.rooms.get(x.room_id) %}
+    <h4>{{ t('directions', lang) }}</h4>
+    {{ maps.route_steps(data.rooms[x.room_id]) }}
+    {{ maps.campus_map(selected=data.rooms[x.room_id], compact=True) }}
+  {% endif %}
+</article>
+{% endmacro %}
+
+{% macro policy(p) %}
+<article class="card kind-policy">
+  <p class="kind">{{ t('policy', lang) }} · {{ p.category }}</p>
+  <h3>{{ tr(p, 'title', lang) }}</h3>
+  <p>{{ tr(p, 'summary', lang) }}</p>
+  {% if p.source %}<p class="source">{{ t('source', lang) }}: {{ p.source }}</p>{% endif %}
+</article>
+{% endmacro %}
+
+{% macro faq(f) %}
+<article class="card kind-faq">
+  <p class="kind">{{ t('faq', lang) }} · {{ f.category }}</p>
+  <h3>{{ tr(f, 'question', lang) }}</h3>
+  <p>{{ tr(f, 'answer', lang) }}</p>
+  {% if f.source %}<p class="source">{{ t('source', lang) }}: {{ f.source }}</p>{% endif %}
+</article>
+{% endmacro %}
+
+{% macro period(p, highlight=False) %}
+<article class="card kind-period {{ 'highlight' if highlight }}">
+  <p class="kind">{{ t('period', lang) }}</p>
+  <h3>{{ tr(p, 'name', lang) }}</h3>
+  {% if p.kind == 'end' %}
+    <p class="big">{{ p.start }}</p>
+  {% else %}
+    <p class="big">{{ p.start }} – {{ p.end }}</p>
+  {% endif %}
+</article>
+{% endmacro %}
+
+{% macro periods_table(periods, current_id=None) %}
+<table class="table">
+  <thead><tr><th>{{ t('period_col', lang) }}</th><th>{{ t('starts', lang) }}</th><th>{{ t('ends', lang) }}</th></tr></thead>
+  <tbody>
+  {% for p in periods %}
+    <tr class="{{ 'break' if p.kind == 'break' }} {{ 'now' if p.period_id == current_id }}">
+      <td>{{ tr(p, 'name', lang) }}{% if p.period_id == current_id %} <span class="tag">{{ t('now_marker', lang) }}</span>{% endif %}</td>
+      <td>{{ p.start }}</td><td>{{ p.end if p.kind != 'end' else '' }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro event(e) %}
+<article class="card kind-event">
+  <p class="kind">{{ t('cat_' ~ (e.category or 'event'), lang) }}</p>
+  <h3>{{ tr(e, 'name', lang) }}</h3>
+  <dl class="facts">
+    <div><dt>{{ t('date', lang) }}</dt><dd>{{ fmt_date(e.date) }}{% if e.end_date and e.end_date != e.date %} – {{ fmt_date(e.end_date) }}{% endif %}</dd></div>
+    <div><dt>{{ t('time', lang) }}</dt><dd>{% if e.start %}{{ e.start }} – {{ e.end }}{% else %}{{ t('all_day', lang) }}{% endif %}</dd></div>
+    {% if e.room_id %}<div><dt>{{ t('location', lang) }}</dt><dd>{{ room_line(e.room_id) }}</dd></div>{% endif %}
+  </dl>
+  {% if tr(e, 'description', lang) %}<p>{{ tr(e, 'description', lang) }}</p>{% endif %}
+</article>
+{% endmacro %}
+
+{% macro club(c) %}
+<article class="card kind-club">
+  <p class="kind">{{ t('club', lang) }}</p>
+  <h3>{{ tr(c, 'name', lang) }}</h3>
+  <dl class="facts">
+    <div><dt>{{ t('time', lang) }}</dt><dd>{{ c.day }} {{ c.start }} – {{ c.end }}</dd></div>
+    <div><dt>{{ t('teacher', lang) }}</dt><dd>{{ data.teacher_name(c.teacher_id) }}</dd></div>
+    <div><dt>{{ t('room', lang) }}</dt><dd>{{ room_line(c.room_id) }}</dd></div>
+  </dl>
+</article>
+{% endmacro %}
+
+{% macro student_summary(s) %}
+<article class="card kind-student">
+  <p class="kind">{{ t('student', lang) }}</p>
+  <h3>{{ s.first_name }} {{ s.last_name }}</h3>
+  <dl class="facts">
+    <div><dt>{{ t('year', lang) }}</dt><dd>{{ s.year }}</dd></div>
+    <div><dt>{{ t('class_group', lang) }}</dt><dd>{{ s.class_group }}</dd></div>
+    <div><dt>{{ t('homeroom', lang) }}</dt><dd>{{ data.teacher_name(s.homeroom_teacher_id) }}</dd></div>
+  </dl>
+  <p><a class="btn small" href="/profile?student={{ s.student_id }}">{{ t('profile', lang) }} →</a></p>
+</article>
+{% endmacro %}
+
+{% macro student_full(s) %}
+{% set rows = data.student_timetable(s.student_id) %}
+<article class="card kind-student">
+  <p class="kind">{{ t('student', lang) }}</p>
+  <h2>{{ s.first_name }} {{ s.last_name }}</h2>
+  <dl class="facts">
+    <div><dt>{{ t('year', lang) }}</dt><dd>{{ s.year }}</dd></div>
+    <div><dt>{{ t('class_group', lang) }}</dt><dd>{{ s.class_group }}</dd></div>
+    <div><dt>{{ t('homeroom', lang) }}</dt><dd>{{ data.teacher_name(s.homeroom_teacher_id) }}</dd></div>
+  </dl>
+
+  <h3>{{ t('timetable', lang) }}</h3>
+  {% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
+  {% set used = rows | map(attribute='period_id') | list %}
+  {% set class_periods = data.periods | selectattr('period_id', 'in', used) | list %}
+  <div class="table-wrap">
+  <table class="table timetable">
+    <thead><tr><th>{{ t('period_col', lang) }}</th>{% for d in days %}<th>{{ t('day_' ~ d, lang) }}</th>{% endfor %}</tr></thead>
+    <tbody>
+      {% for p in class_periods %}
+      <tr>
+        <th scope="row">{{ tr(p, 'name', lang) }}<br><small class="muted">{{ p.start }}</small></th>
+        {% for d in days %}
+          {% set cell = rows | selectattr('day', 'equalto', d) | selectattr('period_id', 'equalto', p.period_id) | first %}
+          <td>{% if cell %}<strong>{{ cell.subject }}</strong><br><small>{{ cell.room_id }}</small>{% endif %}</td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+  <h3>{{ t('my_teachers', lang) }}</h3>
+  <ul class="list">
+    {% set seen = namespace(subjects=[]) %}
+    {% for row in rows if row.subject not in seen.subjects %}
+      {% set seen.subjects = seen.subjects + [row.subject] %}
+      <li><strong>{{ row.subject }}</strong>: {{ data.teacher_name(row.teacher_id) }} · {{ room_line(row.room_id) }}</li>
+    {% endfor %}
+  </ul>
+
+  <h3>{{ t('clubs', lang) }}</h3>
+  <ul class="list">
+    {% for cid in s.club_ids %}{% set c = data.clubs[cid] %}
+      <li><strong>{{ tr(c, 'name', lang) }}</strong>: {{ c.day }} {{ c.start }}–{{ c.end }} · {{ data.teacher_name(c.teacher_id) }} · {{ room_line(c.room_id) }}</li>
+    {% endfor %}
+  </ul>
+</article>
+{% endmacro %}
+
+{% macro hit(h, note='') %}
+  {% if h.kind == 'room' %}{{ room(h.item) }}
+  {% elif h.kind == 'teacher' %}{{ teacher(h.item, show_directions=(note == 'teacher_location')) }}
+  {% elif h.kind == 'policy' %}{{ policy(h.item) }}
+  {% elif h.kind == 'faq' %}{{ faq(h.item) }}
+  {% elif h.kind == 'period' %}{{ period(h.item, highlight=(note in ('current', 'next'))) }}
+  {% elif h.kind == 'event' %}{{ event(h.item) }}
+  {% elif h.kind == 'club' %}{{ club(h.item) }}
+  {% elif h.kind == 'student' %}{{ student_summary(h.item) }}
+  {% endif %}
+{% endmacro %}

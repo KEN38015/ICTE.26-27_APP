@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block content %}
+<h1>How the Smart School Assistant works</h1>
+<section class="card">
+  <h2 class="h3">Who it's for</h2>
+  <p>The assistant is built for SenTia's secondary and high school students. Primary school is not covered. The calendar is the secondary calendar for 2026–2027.</p>
+</section>
+<section class="card">
+  <h2 class="h3">Architecture: UI → logic → data → response</h2>
+  <ol class="flow">
+    <li><strong>UI</strong> (Jinja2 templates + HTMX): you type or say “Where is the ICT room?”. HTMX sends it to the server without reloading the page.</li>
+    <li><strong>Logic</strong> (<code>app/search.py</code>): validates the input, applies privacy rules, detects the intent (here: <em>location</em>), corrects spelling, and scores every record by keyword and phrase matches.</li>
+    <li><strong>Data</strong> (<code>data/*.csv</code>, kept up to date from the team's Google Sheet): the best-matching record is found, e.g. room B4-07, the ICT Room on floor 4 of Zone B.</li>
+    <li><strong>Response</strong>: the server renders a result card with the room, building, floor, step-by-step directions and a map, and HTMX swaps it into the page.</li>
+  </ol>
+  <p>If nothing matches well enough, the assistant says so instead of guessing. It never invents information.</p>
+</section>
+<section class="card">
+  <h2 class="h3">Privacy</h2>
+  <ul class="list">
+    <li>All student data is fictional. No addresses, phone numbers, grades or medical information are stored.</li>
+    <li>Student profiles are checked on the server: students see only their own profile, teachers see students they teach, admins see all.</li>
+    <li>Passwords are stored as salted PBKDF2 hashes. The search log never stores usernames.</li>
+  </ul>
+</section>
+<section class="card">
+  <h2 class="h3">AI usage declaration</h2>
+  <p>AI (Claude, by Anthropic) was used as a coding assistant to plan the architecture, write and test code, turn the school's documents and photos into data files, and create the fictional student data. The team chose the requirements, design and technology, reviewed the code, and is responsible for the final data and testing. The assistant itself does not call any live AI service: every answer comes from the school's approved data using programmed rules. See <code>docs/AI_USAGE.md</code> in the repository for details and prompt history.</p>
+</section>
+{% endblock %}

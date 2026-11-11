@@ -1,0 +1,6 @@
+building_id,name,name_vi,x,y,w,h,entrance_x,entrance_y
+A,Main Building,Tòa nhà chính,60,50,260,150,190,200
+B,Science & Technology Building,Tòa Khoa học & Công nghệ,480,50,260,150,610,200
+C,Arts Building,Tòa Nghệ thuật,60,290,200,130,160,290
+L,Library,Thư viện,320,300,150,110,395,300
+G,Sports Hall & Canteen,Nhà thi đấu & Căng tin,540,290,200,150,640,290

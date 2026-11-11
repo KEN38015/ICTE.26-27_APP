@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% import "partials/cards.html" as cards with context %}
+{% import "partials/filters.html" as f with context %}
+{% block title %}{{ t('policies', page_lang) }}{% endblock %}
+{% block content %}
+<h1>{{ t('policies', page_lang) }}</h1>
+{{ f.filter_bar('/policies', 'category', categories, category, q) }}
+<div id="list" class="cards">
+  {% for p in items %}{{ cards.policy(p) }}{% else %}<p class="muted">{{ t('no_items', page_lang) }}</p>{% endfor %}
+</div>
+{% endblock %}

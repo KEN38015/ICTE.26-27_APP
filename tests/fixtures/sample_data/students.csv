@@ -1,0 +1,4 @@
+student_id,first_name,last_name,year,class_group,homeroom_teacher_id,club_ids
+S001,Alex,Carter,9,9A,T01,C01;C04
+S002,Khanh,Ngo,9,9B,T06,C02;C03
+S003,Chloe,Reed,10,10A,T02,C05;C06

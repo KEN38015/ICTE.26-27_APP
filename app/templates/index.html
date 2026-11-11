@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>{{ t('hero', page_lang) }}</h1>
+  <form class="ask" method="post" action="/ask" hx-post="/ask" hx-target="#answer" hx-swap="innerHTML"
+        hx-indicator="#ask-indicator" hx-disabled-elt="find button[type=submit]" autocomplete="off">
+    <label for="q" class="sr-only">{{ t('placeholder', page_lang) }}</label>
+    <input id="q" name="q" type="search" maxlength="200" required
+           placeholder="{{ t('placeholder', page_lang) }}" value="{{ result.query if result else '' }}">
+    <button type="button" class="btn icon mic" id="mic" hidden aria-label="{{ t('voice', page_lang) }}" title="{{ t('voice', page_lang) }}"
+            data-listening="{{ t('listening', page_lang) }}" data-lang="{{ 'vi-VN' if page_lang == 'vi' else 'en-AU' }}">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11z"/></svg>
+    </button>
+    <button type="submit" class="btn primary">{{ t('ask', page_lang) }}</button>
+  </form>
+  <p id="ask-indicator" class="indicator muted">{{ t('searching', page_lang) }}</p>
+  <p id="voice-status" class="muted small" aria-live="polite"></p>
+
+  <div class="chips" aria-label="{{ t('quick_actions', page_lang) }}">
+    {% for key in ['q_ict', 'q_late', 'q_now', 'q_events', 'q_phone', 'q_science', 'q_lost', 'q_timetable'] %}
+      <a class="chip" href="/ask?q={{ t(key, page_lang)|urlencode }}"
+         hx-post="/ask" hx-vals='{"q": {{ t(key, page_lang)|tojson }}}' hx-target="#answer" hx-swap="innerHTML"
+         hx-push-url="false">{{ t(key, page_lang) }}</a>
+    {% endfor %}
+  </div>
+</section>
+
+<div id="answer">
+  {% if result %}{% include "partials/answer.html" %}{% endif %}
+</div>
+
+{% set history = request.session.get('history', []) %}
+{% if history %}
+<section class="history" id="history">
+  <div class="row">
+    <h2 class="h3">{{ t('recent', page_lang) }}</h2>
+    <form method="post" action="/history/clear" hx-post="/history/clear" hx-target="#history" hx-swap="outerHTML">
+      <button class="btn ghost small" type="submit">{{ t('clear', page_lang) }}</button>
+    </form>
+  </div>
+  <div class="chips">
+    {% for h in history %}
+      <a class="chip subtle" href="/ask?q={{ h|urlencode }}" hx-post="/ask" hx-vals='{"q": {{ h|tojson }}}'
+         hx-target="#answer" hx-swap="innerHTML" hx-push-url="false">{{ h }}</a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section>
+  <h2 class="h3">{{ t('browse', page_lang) }}</h2>
+  <div class="tiles">
+    {% set tiles = [('/policies', 'policies', '📘'), ('/directory', 'directory', '🧑‍🏫'), ('/map', 'map', '🗺️'),
+                    ('/schedule', 'schedule', '🔔'), ('/faqs', 'faqs', '❓'), ('/profile', 'profile', '🎓')] %}
+    {% for href, key, icon in tiles %}
+      <a class="tile" href="{{ href }}"><span class="tile-icon" aria-hidden="true">{{ icon }}</span>{{ t(key, page_lang) }}</a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

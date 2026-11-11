@@ -1,0 +1,91 @@
+class_group,day,period_id,subject,teacher_id,room_id
+9A,Monday,P1,Chemistry,T03,B101
+9A,Monday,P2,Physics,T04,B102
+9A,Monday,P3,ICT,T05,B201
+9A,Monday,P4,Humanities,T06,A201
+9A,Monday,P5,PE,T07,G001
+9A,Monday,P6,Visual Arts,T08,C101
+9A,Tuesday,P1,Humanities,T06,A201
+9A,Tuesday,P2,PE,T07,G001
+9A,Tuesday,P3,Visual Arts,T08,C101
+9A,Tuesday,P4,English,T01,A101
+9A,Tuesday,P5,Mathematics,T02,A102
+9A,Tuesday,P6,Chemistry,T03,B101
+9A,Wednesday,P1,English,T01,A101
+9A,Wednesday,P2,Mathematics,T02,A102
+9A,Wednesday,P3,Chemistry,T03,B101
+9A,Wednesday,P4,Physics,T04,B102
+9A,Wednesday,P5,ICT,T05,B201
+9A,Wednesday,P6,Humanities,T06,A201
+9A,Thursday,P1,Physics,T04,B102
+9A,Thursday,P2,ICT,T05,B201
+9A,Thursday,P3,Humanities,T06,A201
+9A,Thursday,P4,PE,T07,G001
+9A,Thursday,P5,Visual Arts,T08,C101
+9A,Thursday,P6,English,T01,A101
+9A,Friday,P1,PE,T07,G001
+9A,Friday,P2,Visual Arts,T08,C101
+9A,Friday,P3,English,T01,A101
+9A,Friday,P4,Mathematics,T02,A102
+9A,Friday,P5,Chemistry,T03,B101
+9A,Friday,P6,Physics,T04,B102
+9B,Monday,P1,Chemistry,T03,B101
+9B,Monday,P2,Physics,T04,B102
+9B,Monday,P3,ICT,T05,B201
+9B,Monday,P4,Humanities,T06,A201
+9B,Monday,P5,PE,T07,G001
+9B,Monday,P6,Music,T09,C102
+9B,Tuesday,P1,Humanities,T06,A201
+9B,Tuesday,P2,PE,T07,G001
+9B,Tuesday,P3,Music,T09,C102
+9B,Tuesday,P4,English,T01,A101
+9B,Tuesday,P5,Mathematics,T02,A102
+9B,Tuesday,P6,Chemistry,T03,B101
+9B,Wednesday,P1,English,T01,A101
+9B,Wednesday,P2,Mathematics,T02,A102
+9B,Wednesday,P3,Chemistry,T03,B101
+9B,Wednesday,P4,Physics,T04,B102
+9B,Wednesday,P5,ICT,T05,B201
+9B,Wednesday,P6,Humanities,T06,A201
+9B,Thursday,P1,Physics,T04,B102
+9B,Thursday,P2,ICT,T05,B201
+9B,Thursday,P3,Humanities,T06,A201
+9B,Thursday,P4,PE,T07,G001
+9B,Thursday,P5,Music,T09,C102
+9B,Thursday,P6,English,T01,A101
+9B,Friday,P1,PE,T07,G001
+9B,Friday,P2,Music,T09,C102
+9B,Friday,P3,English,T01,A101
+9B,Friday,P4,Mathematics,T02,A102
+9B,Friday,P5,Chemistry,T03,B101
+9B,Friday,P6,Physics,T04,B102
+10A,Monday,P1,Physics,T04,B102
+10A,Monday,P2,ICT,T05,B201
+10A,Monday,P3,Humanities,T06,A201
+10A,Monday,P4,PE,T07,G001
+10A,Monday,P5,Visual Arts,T08,C101
+10A,Monday,P6,Music,T09,C102
+10A,Tuesday,P1,PE,T07,G001
+10A,Tuesday,P2,Visual Arts,T08,C101
+10A,Tuesday,P3,Music,T09,C102
+10A,Tuesday,P4,English,T01,A101
+10A,Tuesday,P5,Mathematics,T02,A102
+10A,Tuesday,P6,Chemistry,T03,B101
+10A,Wednesday,P1,English,T01,A101
+10A,Wednesday,P2,Mathematics,T02,A102
+10A,Wednesday,P3,Chemistry,T03,B101
+10A,Wednesday,P4,Physics,T04,B102
+10A,Wednesday,P5,ICT,T05,B201
+10A,Wednesday,P6,Humanities,T06,A201
+10A,Thursday,P1,Physics,T04,B102
+10A,Thursday,P2,ICT,T05,B201
+10A,Thursday,P3,Humanities,T06,A201
+10A,Thursday,P4,PE,T07,G001
+10A,Thursday,P5,Visual Arts,T08,C101
+10A,Thursday,P6,Music,T09,C102
+10A,Friday,P1,PE,T07,G001
+10A,Friday,P2,Visual Arts,T08,C101
+10A,Friday,P3,Music,T09,C102
+10A,Friday,P4,English,T01,A101
+10A,Friday,P5,Mathematics,T02,A102
+10A,Friday,P6,Chemistry,T03,B101

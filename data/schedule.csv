@@ -1,0 +1,14 @@
+period_id,name,name_vi,aliases,start,end,kind
+MM,Morning Meeting,Sinh hoạt đầu giờ,morning meeting;homeroom;home room;roll call;school start;school starts;start of school;start of day;vao hoc;sinh hoat dau gio;sinh hoat lop,07:45,07:55,class
+P1,Period 1,Tiết 1,first period;p1;tiet 1,08:00,08:45,class
+P2,Period 2,Tiết 2,second period;p2;tiet 2,08:50,09:35,class
+P3,Period 3,Tiết 3,third period;p3;tiet 3,09:40,10:25,class
+R,Break Time,Giờ ra chơi,recess;break time;morning break;break;morning tea;ra choi;gio ra choi,10:25,10:40,break
+P4,Period 4,Tiết 4,fourth period;p4;tiet 4,10:40,11:25,class
+P5,Period 5,Tiết 5,fifth period;p5;tiet 5,11:30,12:15,class
+L,Lunch Time,Giờ ăn trưa,lunch;lunch time;lunch break;lunchtime;nghi trua;an trua;gio an trua,12:15,13:20,break
+P6,Period 6,Tiết 6,sixth period;p6;tiet 6,13:20,14:05,class
+P7,Period 7,Tiết 7,seventh period;p7;tiet 7,14:10,14:55,class
+P8,Period 8,Tiết 8,eighth period;last period;p8;tiet 8,15:05,15:50,class
+SN,Afternoon Snack,Ăn nhẹ buổi chiều,afternoon snack;snack time;afternoon break;an nhe;bua phu;an nhe chieu,15:50,16:05,break
+END,End of Day,Tan học,end of day;school ends;school finishes;home time;finish;dismissal;tan hoc;het gio,16:05,16:05,end

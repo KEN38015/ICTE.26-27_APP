@@ -1,0 +1,14 @@
+teacher_id,title,first_name,last_name,position,position_vi,subjects,department,department_vi,room_id
+T01,Ms,Sarah,Nguyen,Head of English,Trưởng bộ môn Tiếng Anh,English;Literature,English,Tiếng Anh,A101
+T02,Mr,David,Tran,Mathematics Teacher,Giáo viên Toán,Mathematics;Maths,Mathematics,Toán,A102
+T03,Mrs,Linh,Pham,Science Teacher,Giáo viên Khoa học,Chemistry;Science,Science,Khoa học,B101
+T04,Mr,James,Walker,Science Teacher,Giáo viên Khoa học,Physics;Science,Science,Khoa học,B102
+T05,Mr,Huy,Le,Head of Technology,Trưởng bộ môn Công nghệ,ICT;Computer Science;Digital Technologies,Technology,Công nghệ,B201
+T06,Ms,Emily,Hoang,Humanities Teacher,Giáo viên Khoa học Xã hội,History;Geography,Humanities,Khoa học Xã hội,A201
+T07,Mr,Tuan,Vo,PE Teacher,Giáo viên Thể dục,Physical Education;PE;Sport,Health & PE,Thể chất,G001
+T08,Ms,Hannah,Brooks,Visual Arts Teacher,Giáo viên Mỹ thuật,Visual Arts;Art,Arts,Nghệ thuật,C101
+T09,Mr,Quang,Dang,Music Teacher,Giáo viên Âm nhạc,Music,Arts,Nghệ thuật,C102
+T10,Mrs,Mai,Bui,Librarian,Thủ thư,Library,Library,Thư viện,L001
+T11,Ms,Grace,Kim,School Counsellor,Chuyên viên tư vấn,Wellbeing;Counselling,Student Services,Hỗ trợ Học sinh,A202
+T12,Dr,Robert,Hughes,Principal,Hiệu trưởng,Leadership,Leadership,Ban Giám hiệu,A002
+T13,Mr,Kevin,Do,ICT Support Technician,Kỹ thuật viên Tin học,ICT Support,Technology,Công nghệ,B202

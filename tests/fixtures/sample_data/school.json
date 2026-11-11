@@ -1,0 +1,12 @@
+{
+  "name": "Lakeside Academy",
+  "name_vi": "Trường Lakeside Academy",
+  "is_sample": true,
+  "timezone": "Asia/Ho_Chi_Minh",
+  "map": {
+    "width": 800,
+    "height": 500,
+    "gate": [290, 470],
+    "hub": [290, 245]
+  }
+}
