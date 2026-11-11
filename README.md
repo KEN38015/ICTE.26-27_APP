@@ -2,6 +2,8 @@
 
 ICT Explorer 2026 · Smart School Assistant Challenge
 
+**Live demo:** https://icte-26-27-app.vercel.app (opens in any browser, nothing to install; demo logins are listed below)
+
 A web assistant that helps students, teachers and staff quickly find accurate school information by typing or speaking a question, or by browsing. Every answer comes from the school's approved data using programmed rules: keyword and phrase matching, intents, filters and privacy rules. **It never invents an answer.**
 
 > **Status:** policies and procedures come from the **SenTia School Handbook 2025–2026** (42 policies, 24 FAQs, each citing its handbook section), and the bell schedule is SenTia's real one (8 periods, 07:45–16:05). Rooms and the campus map come from SenTia's floor-map signs and door signs (80 places across Zones A and B, 4 floors), and staff from the team's staff list (50 people, including the principals, nurses, librarian and counsellors, with the homeroom class of each of the 13 secondary classes). Events come from SenTia's provisional 2026–2027 secondary calendar (44 entries: holidays, exams, parent meetings, trips and projects). Rebuild with `.venv/bin/python -m tools.sentia_campus` and `.venv/bin/python -m tools.sentia_calendar`. All student data is fictional and must stay fictional.
